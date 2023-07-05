@@ -61,6 +61,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setQuestion() {
 
+        defaultOptionsView()
+
         val question: Question = mQuestionsList!![mCurrentPosition - 1]
         ivImage?.setImageResource(question.image)
 
@@ -155,6 +157,9 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         mCurrentPosition <= mQuestionsList!!.size -> {
                             setQuestion()
                         }
+                        else -> {
+                            Toast.makeText(this, "You made it to the end!", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                 } else {
@@ -165,6 +170,14 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     }
 
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+
+                    if (mCurrentPosition == mQuestionsList!!.size) {
+                        btnSubmit?.text = "FINISH"
+                    } else {
+                        btnSubmit?.text = "GO TO NEXT QUESTION"
+                    }
+
+                    mSelectedOptionPosition = 0
 
                 }
             }
